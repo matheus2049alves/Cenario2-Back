@@ -12,17 +12,6 @@ const port = process.env.PORT || 5000;
 app.use(bodyParser.json());
 app.use(cors());
 
-//rota para criar um item
-app.post("/item", async (req, res) => {
-  const dados = req.body;
-  await prisma.item.create({
-    data: {
-      nome: dados.nome,
-    },
-  });
-  return res.sendStatus(201);
-});
-
 //Rotas
 app.get("/users", async (req, res) => {
   const users = await prisma.user.findMany();
@@ -49,4 +38,9 @@ app.get("/user/:name", async (req, res) => {
   });
   if (user.length > 0) return res.status(200).send(user);
   return res.send("No user found");
+});
+
+// Inicie o servidor na porta especificada
+app.listen(port, () => {
+  console.log(`Servidor Express rodando na porta ${port}`);
 });

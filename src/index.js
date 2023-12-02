@@ -13,12 +13,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 //Rotas
-app.get("/users", async (req, res) => {
-  const users = await prisma.user.findMany();
-  if (users.length > 0) return res.status(200).send(users);
-  return res.send("No users found");
-});
-
+//criar item
 app.post("/user", async (req, res) => {
   const data = req.body;
   await prisma.user.create({
@@ -28,6 +23,13 @@ app.post("/user", async (req, res) => {
   });
   return res.sendStatus(201);
 });
+//listar
+app.get("/users", async (req, res) => {
+  const users = await prisma.user.findMany();
+  if (users.length > 0) return res.status(200).send(users);
+  return res.send("No users found");
+});
+//procura
 
 app.get("/user/:name", async (req, res) => {
   const name = req.params.name;

@@ -16,7 +16,7 @@ app.use(cors());
 //criar item
 app.post("/users", async (req, res) => {
   const data = req.body;
-  await prisma.user.create({
+  await prisma.users.create({
     data: {
       nome: data.nome,
     },
@@ -25,7 +25,7 @@ app.post("/users", async (req, res) => {
 });
 //listar
 app.get("/users", async (req, res) => {
-  const users = await prisma.user.findMany();
+  const users = await prisma.users.findMany();
   if (users.length > 0) return res.status(200).send(users);
   return res.send("No users found");
 });
@@ -33,7 +33,7 @@ app.get("/users", async (req, res) => {
 
 app.get("/users/:name", async (req, res) => {
   const name = req.params.name;
-  const user = await prisma.user.findMany({
+  const user = await prisma.users.findMany({
     where: {
       nome: name,
     },

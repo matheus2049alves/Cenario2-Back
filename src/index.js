@@ -19,7 +19,7 @@ app.get("/users", async (req, res) => {
   return res.send("No users found");
 });
 
-app.post("/users", async (req, res) => {
+app.post("/user", async (req, res) => {
   const data = req.body;
   await prisma.user.create({
     data: {
@@ -29,7 +29,7 @@ app.post("/users", async (req, res) => {
   return res.sendStatus(201);
 });
 
-app.get("/users/:name", async (req, res) => {
+app.get("/user/:name", async (req, res) => {
   const name = req.params.name;
   const user = await prisma.user.findMany({
     where: {

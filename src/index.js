@@ -23,17 +23,17 @@ app.post("/user", async (req, res) => {
   const data = req.body;
   await prisma.user.create({
     data: {
-      name: data.name,
+      nome: data.nome,
     },
   });
   return res.sendStatus(201);
 });
 
-app.get("/user/:name", async (req, res) => {
-  const name = req.params.name;
+app.get("/user/:nome", async (req, res) => {
+  const nome = req.params.nome;
   const user = await prisma.user.findMany({
     where: {
-      name: name,
+      nome: nome,
     },
   });
   if (user.length > 0) return res.status(200).send(user);
